@@ -1,5 +1,5 @@
 # Architecture
-![Vagrant Docker](https://gitlab.squiz.net/dkarunakaran/vagrant-docker-sugarcrm/uploads/496cc1b95cb3a69dcb2eeb7bbe4c97e5/vagrant_docker_centos.png "Vagrant Docker")
+![Vagrant Docker](screenshots/vagrant_docker_centos.png "Vagrant Docker")
 
 # What is Vagrant and Docker?
 Vagrant: Vagrant create identical development environment for everyone on your team
