@@ -1,0 +1,98 @@
+# THIS IS A WIP!
+
+# Node setup
+cluster.name: SugarCRM
+node.name: "sugarcrm"
+
+# Allow this node to be eligible as a master node (enabled by default):
+#node.master: true
+
+# Allow this node to store data (enabled by default):
+#node.data: true
+
+# Explicitly set the http bind ip and port
+#network.bind.host: 127.0.0.1
+http.port: 9200
+http.enabled: true
+
+# Disable network (for local use only)
+#discovery.zen.ping.multicast.enabled: false
+#node.local: true
+
+# Set the number of replicas and shards to minimal values
+index.number_of_shards: 5
+index.number_of_replicas: 0
+
+# Increase ES security a little - See https://support.sugarcrm.com/04_Knowledge_Base/02Administration/100Install/Installing_and_Administering_Elasticsearch_for_Sugar_7/
+action.disable_close_all_indices: true
+action.disable_delete_all_indices: true
+action.disable_shutdown: true
+script.disable_dynamic: true
+
+# Recommended - see http://goo.gl/yXvzXo
+bootstrap.mlockall: true
+
+# By default, multiple nodes are allowed to start from the same installation location
+# to disable it, set the following:
+node.max_local_storage_nodes: 1
+
+# SugarCRM fully controls the mapping, to avoid any issues we don't
+# want Elasticsearch to dynamically create mappings. Note that this
+# may have unexpected results if other application than SugarCRM are
+# using the Elasticsearch cluster.
+index.mapper.dynamic: false
+
+# SugarCRM fully controls the indices, we don't want Elasticsearch to
+# create them for us in case data is being send to Elasticsearch before
+# the indices/mappings are deployed.
+action.auto_create_index : false
+
+# Precaution disabling wildcards and _all notation for destructive operations.
+action.destructive_requires_name : true
+
+# Important when performing URL based ACL between SugarCRM and Elasticsearch.
+# Doesn't harm to use this setting without such an additional layer.
+rest.action.multi.allow_explicit_index: false
+
+# Not really required when Elasticsearch is properly shielded from the outside
+# world. Dynamic scripting is currently not used by SugarCRM and probably wont
+# be in the near future.
+script.disable_dynamic: true
+
+# Set this node to the gateway node
+gateway.type: local
+gateway.recover_after_nodes: 1
+gateway.recover_after_time: 5m
+gateway.expected_nodes: 1
+
+# Shard level query and fetch threshold logging.
+index.search.slowlog.threshold.query.warn: 10s
+index.search.slowlog.threshold.query.info: 5s
+index.search.slowlog.threshold.query.debug: 2s
+index.search.slowlog.threshold.query.trace: 500ms
+
+index.search.slowlog.threshold.fetch.warn: 1s
+index.search.slowlog.threshold.fetch.info: 800ms
+index.search.slowlog.threshold.fetch.debug: 500ms
+index.search.slowlog.threshold.fetch.trace: 200ms
+
+index.indexing.slowlog.threshold.index.warn: 10s
+index.indexing.slowlog.threshold.index.info: 5s
+index.indexing.slowlog.threshold.index.debug: 2s
+index.indexing.slowlog.threshold.index.trace: 500ms
+
+################################## GC Logging ################################
+
+monitor.jvm.gc.young.warn: 1000ms
+monitor.jvm.gc.young.info: 700ms
+monitor.jvm.gc.young.debug: 400ms
+
+monitor.jvm.gc.old.warn: 10s
+monitor.jvm.gc.old.info: 5s
+monitor.jvm.gc.old.debug: 2s
+
+path:
+  data: /data/data
+  logs: /data/log
+  plugins: /data/plugins
+  work: /data/work

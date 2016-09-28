@@ -1,0 +1,44 @@
+HELP
+
+1)Do vagrant ssh to get into guest os
+2)Copy and run each line given below at a time if vagrant up or reload doesnt create the docker containers
+
+cd /app/docker-config/elasticsearch && bash start.sh &&
+cd /app/docker-config/dataonly && bash start.sh
+cd /app/docker-config/database && bash start.sh
+cd /app/docker-config/webserver && bash start.sh
+
+3)Find IP address for mysqlcontainer and elastic search
+
+  a)Run /app/ip.sh
+
+
+4)Get into web server container
+
+  a) Run vagrant ssh
+  b) Run docker exec -it webserver bash
+
+5)Get into mysql server container
+
+    a) Run vagrant ssh
+    b) Run docker exec -it mysqlserver bash
+
+
+6)elasticsearch official directory - https://hub.docker.com/_/elasticsearch/
+
+7) rsync error on windows - http://www.adamkdean.co.uk/rsync-could-not-be-found-on-your-path
+
+8) Windows shared folder config 
+
+config.vm.synced_folder ".", "/app", id: "vagrant-root", 
+owner: "www-data", 
+group: "www-data", 
+mount_options: ["dmode=775,fmode=775"] 
+
+9) Creating a new container
+
+createNewSugarContainer.sh <name of the sugar container folder> <New folder where installation file is located> <new port>
+
+10) Removing all docker container
+
+http://www.tekhead.org/blog/2014/09/docker-part-2-howto-remove-delete-docker-containers/
